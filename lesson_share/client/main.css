@@ -2,6 +2,11 @@
 *{
 	color: #666666;
 	font-size: 16px;
+	background-color: #ebe9eb;
+}
+
+*:focus{
+  outline: none;
 }
 
 #master{
@@ -9,8 +14,8 @@
 }
 
 #sub_master{
-	background-color: #ebe9eb;
-	height: 100vh;
+	/*background-color: #ebe9eb;*/
+	/*height: 100vh;*/
 
 }
 
@@ -30,4 +35,12 @@ h1.content{
 input[name=search]{
 	max-width: 100%;
 	min-width: 100%;
+	background-color: white;
+	padding: 1rem;
+	border-radius: 1rem;
+	border: 1px solid #cccccc;
+}
+
+textarea:focus, input:focus{
+  outline: none;
 }
