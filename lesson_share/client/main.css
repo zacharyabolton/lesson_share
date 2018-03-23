@@ -2,7 +2,7 @@
 *{
 	color: #666666;
 	font-size: 16px;
-	background-color: #ebe9eb;
+	/*background-color: #ebe9eb;*/
 }
 
 *:focus{
@@ -28,12 +28,20 @@
 	background-color: white;
 }
 
+.upload span, .logout span, #loginMenu span{
+	color: inherit;
+}
+
 .content{
 	max-width: 500px;
   margin: auto;
   text-align: center;
   
   /*padding-bottom: 1rem;*/
+}
+
+.modal-content .modal-body form label{
+	padding-top: 1rem;
 }
 
 h1.content{

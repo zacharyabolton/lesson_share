@@ -44,7 +44,7 @@
 <template name="login">
   <div class="nav navbar-nav navbar-right dropdown show">
   	<a class="dropdown-toggle navbar-text" href="#" role="button" id="loginMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-			login
+			login <span class="glyphicon glyphicon-log-in" aria-hidden="true"></span>
 		</a>
 	  <div class="dropdown-menu">
 		  <form class="px-4 py-3">
@@ -71,7 +71,63 @@
 </template>
 
 <template name="dashboard">
-	<ul class="nav navbar-nav navbar-right loginButtons">
-    <p><a href="#" class="logout">Logout</a></p>
-  </ul>
+	<div class="nav navbar-nav navbar-right">
+		<a class="upload navbar-text" href="#" role="button" id="upload" data-toggle="modal" data-target="#uploadModal">
+		  <span class="glyphicon glyphicon-upload" aria-hidden="true"></span> upload
+		</a>
+		<a class="logout navbar-text" href="#" role="button" id="logout">
+			<span class="glyphicon glyphicon-log-out" aria-hidden="true"></span> logout
+		</a>
+	</div>
+
+	<!-- Modal -->
+	<div id="uploadModal" class="modal fade" role="dialog" tabindex="-1" aria-labelledby="uploadModalLabel" aria-hidden="true">
+	  <div class="modal-dialog" role="document">
+
+	    <!-- Modal content-->
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <button type="button" class="close" data-dismiss="modal">&times;</button>
+	        <h4 class="modal-title" id="uploadModalLabel">Upload your lesson plan.</h4>
+	      </div>
+	      <div class="modal-body">
+	        <!-- Form -->
+	        <form method='post' action='' enctype="multipart/form-data">
+	        	<label for="title">Lesson Plan Title</label>
+	        	<input class='form-control' type="text" name="title" placeholder="title">
+	        	<label for="subject">Lesson Plan Subject</label>
+	        	<input class='form-control' type="text" name="subject" placeholder="subject">
+	        	<label for="grade_level">Grade Level</label>
+	        	<select class='form-control' name="grade_level">
+	        		<option value="Pre-K">Pre-K</option>
+	        		<option value="Kindergarten">Kindergarten</option>
+						  <option value="1st">1st</option>
+						  <option value="2nd">2nd</option>
+						  <option value="3rd">3rd</option>
+						  <option value="4th">4th</option>
+						  <option value="5th">5th</option>
+						  <option value="6th">6th</option>
+						  <option value="7th">7th</option>
+						  <option value="8th">8th</option>
+						  <option value="9th">9th</option>
+						  <option value="10th">10th</option>
+						  <option value="11th">11th</option>
+						  <option value="12th">12th</option>
+						</select>
+						<label for="tags">Tags</label>
+						<input class='form-control' type="text" name="tags" placeholder="seperate by commas...">
+	          <label for="file">Browse or drop below (PDFs only).</label>
+	          <input type='file' name='file' id='file' class='form-control' accept=".pdf"><br>
+	          <input type='button' class='btn btn-primary' value='Upload' id='upload'>
+	        </form>
+
+	        <!-- Preview-->
+	        <div id='preview'></div>
+	      </div>
+	 
+	    </div>
+
+	  </div>
+	</div>
+
 </template>

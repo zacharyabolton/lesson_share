@@ -35,5 +35,17 @@ Template.dashboard.events({
     'click .logout': function(event){
         event.preventDefault();
         Meteor.logout();
+    },
+    'click #upload': function(event){
+        var titleVar = event.target.title.value
+        var subjectVar = event.target.subject.value
+        var grade_levelVar = event.target.grade_level.value
+        var tagsVar = event.target.tags.value
+        var fileVar = event.target.file.value
+        console.log(titleVar)
+        console.log(subjectVar)
+        console.log(grade_levelVar)
+        console.log(tagsVar)
+        console.log(fileVar)
     }
 });
