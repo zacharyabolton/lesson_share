@@ -9,10 +9,12 @@ Template.register.events({
         event.preventDefault();
         var emailVar = event.target.registerEmail.value;
         var passwordVar = event.target.registerPassword.value;
+        var nameVar = event.target.registerName.value;
         console.log("Form submitted.");
         Accounts.createUser({
             email: emailVar,
-            password: passwordVar
+            password: passwordVar,
+            name: nameVar
         });
     }
 });
@@ -22,6 +24,8 @@ Template.login.events({
         event.preventDefault();
         var emailVar = event.target.loginEmail.value;
         var passwordVar = event.target.loginPassword.value;
+        var rememberVar = event.target.dropdownCheck.checked;
+        console.log(rememberVar)
         console.log("Form submitted.");
         Meteor.loginWithPassword(emailVar, passwordVar);
     }

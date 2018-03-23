@@ -19,17 +19,14 @@
 
 }
 
-/*.loginButtons form input[type="submit"]{
-	display: none;
+.dropdown-menu{
+	min-width: 30rem;
+	padding: 2rem;
 }
 
-.loginButtons form input[type="email"]{
-	display: none;
+.dropdown-menu form, .dropdown-menu form .form-check, .dropdown-menu form .form-check *{
+	background-color: white;
 }
-
-.loginButtons form input[type="password"]{
-	display: none;
-}*/
 
 .content{
 	max-width: 500px;
