@@ -1,7 +1,50 @@
 <template name='banner'>
 	<nav class="navbar navbar-light bg-light">
-	  <a class="navbar-brand" href="#">
-	    <img src="LS_Shadow.svg" width="60" height="60" alt="LS">
-	  </a>
+		<div class="container-fluid">
+		  <a class="navbar-brand" href="#">
+		    <img src="LS_Shadow.svg" width="60" height="60" alt="LS">
+		  </a>
+		  
+      {{#if currentUser}}
+	        {{> dashboard}}
+	    {{else}}
+	        {{> register}}
+
+	        {{> login}}
+	    {{/if}}
+	  </div>
 	</nav>
+</template>
+
+<template name="register">
+	<ul class="nav navbar-nav navbar-right loginButtons">
+	  <a data-toggle="collapse" href="#collapse_register" aria-expanded="false" aria-controls="collapseExample">
+	    register
+	  </a>
+    <form class="collapse" id="collapse_register">
+        <input type="email" name="registerEmail">
+        <input type="password" name="registerPassword">
+        <input type="submit" value="Register">
+    </form>
+  </ul>
+</template>
+
+<template name="login">
+	<ul class="nav navbar-nav navbar-right loginButtons">
+	  <a data-toggle="collapse" href="#collapse_login" aria-expanded="false" aria-controls="collapseExample">
+	    login
+	  </a>
+		<span><b>|&nbsp;</b></span>
+    <form class="collapse" id="collapse_login">
+        <input type="email" name="loginEmail">
+        <input type="password" name="loginPassword">
+        <input type="submit" value="Login">
+    </form>
+  </ul>
+</template>
+
+<template name="dashboard">
+	<ul class="nav navbar-nav navbar-right loginButtons">
+    <p><a href="#" class="logout">Logout</a></p>
+  </ul>
 </template>
