@@ -117,8 +117,23 @@
 						<label for="tags">Tags</label>
 						<input class='form-control' type="text" name="tags" placeholder="seperate by commas...">
 	          <label for="file">Browse or drop below (PDFs only).</label>
-	          <input type='file' name='file' id='file' class='form-control' accept=".pdf"><br>
-	          <input type='button' class='btn btn-primary' value='Upload' id='upload'>
+
+	          <!-- {{#with currentUpload}}
+					    Uploading <b>{{file.name}}</b>:
+					    <span id="progress">{{progress.get}}%</span>
+					  {{else}}
+					    <input name='file' type="file" id="fileInput" accept=".pdf">
+					  {{/with}} -->
+
+						{{#if currentFile}}
+					    {{#with currentFile}}
+					      <span id="progress">{{progress}}%</span>
+					    {{/with}}
+					  {{else}}
+					    <input id="fileInput" type="file"  accept=".pdf" name="selectedFile" />
+					  {{/if}}
+
+	          <input type='button' class='btn btn-primary' value='Upload' id='submitUpload'>
 	        </form>
 
 	        <!-- Preview-->

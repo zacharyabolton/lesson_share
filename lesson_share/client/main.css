@@ -32,6 +32,8 @@
 	color: inherit;
 }
 
+
+
 .content{
 	max-width: 500px;
   margin: auto;
@@ -42,6 +44,10 @@
 
 .modal-content .modal-body form label{
 	padding-top: 1rem;
+}
+
+#fileInput{
+	padding-bottom: 2rem;
 }
 
 h1.content{

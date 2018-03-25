@@ -1,0 +1,18 @@
+<head>
+  <title>test</title>
+</head>
+
+<body>
+  <h1>Test</h1>
+
+  {{> uploadForm}}
+</body>
+
+<template name="uploadForm">
+  {{#with currentUpload}}
+    Uploading <b>{{file.name}}</b>:
+    <span id="progress">{{progress.get}}%</span>
+  {{else}}
+    <input id="fileInput" type="file" />
+  {{/with}}
+</template>
