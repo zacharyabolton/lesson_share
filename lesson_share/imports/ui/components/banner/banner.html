@@ -94,11 +94,13 @@
 	        <!-- Form -->
 	        <form method='post' action='' enctype="multipart/form-data">
 	        	<label for="title">Lesson Plan Title</label>
-	        	<input class='form-control' type="text" name="title" placeholder="title">
+	        	<input class='form-control' type="text" name="title" placeholder="title" required>
 	        	<label for="subject">Lesson Plan Subject</label>
-	        	<input class='form-control' type="text" name="subject" placeholder="subject">
-	        	<label for="grade_level">Grade Level</label>
-	        	<select class='form-control' name="grade_level">
+	        	<input class='form-control' type="text" name="subject" placeholder="subject" required>
+	        	<label for="grade">Grade Level</label>
+	        	<select class='form-control' name="grade" required>
+	        		<option value="">--none selected--</option>
+	        		<option value="Any">Any</option>
 	        		<option value="Pre-K">Pre-K</option>
 	        		<option value="Kindergarten">Kindergarten</option>
 						  <option value="1st">1st</option>
@@ -115,7 +117,7 @@
 						  <option value="12th">12th</option>
 						</select>
 						<label for="tags">Tags</label>
-						<input class='form-control' type="text" name="tags" placeholder="seperate by commas...">
+						<input class='form-control' type="text" name="tags" placeholder="seperate by commas..." required>
 	          <label for="file">Browse or drop below (PDFs only).</label>
 
 	          <!-- {{#with currentUpload}}
@@ -130,10 +132,11 @@
 					      <span id="progress">{{progress}}%</span>
 					    {{/with}}
 					  {{else}}
-					    <input id="fileInput" type="file"  accept=".pdf" name="selectedFile" />
+					    <input id="fileInput" type="file"  accept=".pdf" name="selectedFile" required="">
+					    <input type='button' class='btn btn-primary' value='Upload' id='submitUpload' data-dismiss="modal" disabled="disabled">
 					  {{/if}}
 
-	          <input type='button' class='btn btn-primary' value='Upload' id='submitUpload'>
+	          
 	        </form>
 
 	        <!-- Preview-->
