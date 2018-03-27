@@ -1,17 +1,21 @@
 import { Meteor } from 'meteor/meteor';
 import { Docs } from '../docs.js';
 
-// Meteor.publish('files.docs.all', function () {
+import { check } from 'meteor/check';
+import { Match } from 'meteor/check';
+
+// Meteor.publish('docs', function () {
 //   return Docs.find().cursor;
 // });
 
 
 
 Meteor.publish( 'docs', function( search ) {
-	console.log('inside publication');
-	console.log(search);
-	console.log("does it ever get this far?")
-  check( search, Match.OneOf( String, null, undefined ) );
+
+	check( search, Match.OneOf( String, null, undefined ) );
+
+	// console.log('inside publication');
+	// console.log('searchQuery = '+search);
 
   let query      = {},
       projection = { limit: 10, sort: { title: 1 } };
@@ -21,9 +25,11 @@ Meteor.publish( 'docs', function( search ) {
 
     query = {
       $or: [
-        { title: regex },
-        { author: regex },
-        { subject: regex }
+        { name: regex },
+        { "meta.title": regex },
+        { "meta.subject": regex },
+        { "meta.tags": regex },
+        { "meta.author": regex }
       ]
     };
 

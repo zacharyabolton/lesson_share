@@ -18,7 +18,6 @@ FlowRouter.route('/', {
 FlowRouter.route('/:params', {
   name: 'results',
   action() {
-  	console.log("results page loaded...")
     BlazeLayout.render('App_body', { main: 'results' });
   },
 });
