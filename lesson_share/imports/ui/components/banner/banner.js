@@ -7,14 +7,6 @@ import './banner.html';
 
 import {Docs} from '../../../api/docs/docs.js';
 
-// Meteor.subscribe('files.docs.all');
-Meteor.subscribe('docs');
-
-var form = document.querySelector('form')
-var inputs = document.querySelectorAll('input')
-var required_inputs = document.querySelectorAll('input[required]')
-var register = document.querySelector('input[type="submit"]')
-
 Template.register.events({
     'submit form': function(event) {
         event.preventDefault();
@@ -43,30 +35,8 @@ Template.login.events({
 });
 
 Template.dashboard.onCreated(function () {
-	var userId = function(){
-  	if (Meteor.userId()){
-  		return Meteor.userId();
-  	}else{
-  		return false;
-  	}
-  };
-  var userName = function(){
-  	if (Meteor.user().profile.name){
-  		return Meteor.user().profile.name;
-  	}else{
-  		return false;
-  	}
-  };
   this.currentFile = new ReactiveVar(false);
-  this.uploadFields = new ReactiveDict({
-  	'title': false,
-    'subject': false,
-    'grade': false,
-    'tags': false,
-    'owner': userId(),
-    'author': userName(),
-    'selectedFile': false
-  });
+  this.uploadInprogress = new ReactiveVar(false);
 });
 
 Template.dashboard.helpers({
@@ -76,6 +46,27 @@ Template.dashboard.helpers({
 
 });
 
+let uploadModalHandler = function(event, template, hide){
+	template.find('[name="title"]').readOnly = !hide;
+  template.find('[name="subject"]').readOnly = !hide;
+  template.find('[name="grade"]').disabled = !hide;
+  template.find('[name="tags"]').readOnly = !hide;
+
+ 	template.find('[name="selectedFile"]').disabled = !hide;
+ 	template.find('[id="closeUploadModal"]').disabled = !hide;
+
+ 	template.find('[id="submitUpload"]').disabled = true;
+	if (hide){
+		$('#uploadModal').modal('hide');
+
+	 	template.find('[name="title"]').value = '';
+	  template.find('[name="subject"]').value = '';
+	  template.find('[name="grade"]').value = '';
+	  template.find('[name="tags"]').value = '';
+
+	 	template.find('[name="selectedFile"]').value = '';
+	}
+}
 
 Template.dashboard.events({
     'click .logout': function(event){
@@ -84,19 +75,20 @@ Template.dashboard.events({
     },
     'click #submitUpload': function (event, template) {
         event.preventDefault();
-
         if (template.find('[name="selectedFile"]').files && template.find('[name="selectedFile"]').files[0]) {
-          // We upload only one file, in case
-          // there was multiple files selected
-          var titleVar = template.find('[name="title"]').value;
+        	var titleVar = template.find('[name="title"]').value;
           var subjectVar = template.find('[name="subject"]').value;
           var gradeVar = template.find('[name="grade"]').value;
           var tagsVar = template.find('[name="tags"]').value;
           var ownerVar = Meteor.userId();
           var authorVar = Meteor.user().profile.name;
+          // We upload only one file, in case
+          // there was multiple files selected
           var fileVar = template.find('[name="selectedFile"]').files[0];
-          
-          Docs.insert({
+
+          uploadModalHandler(event, template, false);
+          template.uploadInprogress.set(true);
+    			Docs.insert({
             file: fileVar,
             meta: {
             	title: titleVar,
@@ -107,38 +99,38 @@ Template.dashboard.events({
             	author: authorVar
             },
             onStart: function () {
+            	template.uploadInprogress.set(true);
               template.currentFile.set(this);
             },
             onUploaded: function (error, fileObj) {
               if (error) {
+              	uploadModalHandler(event, template, true);
                 alert('Error during upload: ' + error);
               } else {
+              	uploadModalHandler(event, template, true);
                 alert('File "' + fileObj.name + '" successfully uploaded');
               }
               template.currentFile.set(false);
+              template.uploadInprogress.set(false);
             },
             streams: 'dynamic',
             chunkSize: 'dynamic'
           });
         }
     },
-    'change .uploadForm, blur .uploadForm': function(event, template){
-    	if (event.target.value != ''){
-    		template.uploadFields.set(event.target.name, true);
-    	}else{
-    		template.uploadFields.set(event.target.name, false);
-    	}
-
-			if (	(template.uploadFields.get('title') !== false) && 
-						(template.uploadFields.get('subject') !== false) && 
-						(template.uploadFields.get('grade') !== false) && 
-						(template.uploadFields.get('tags') !== false) && 
-						(template.uploadFields.get('author') !== false) && 
-						(template.uploadFields.get('owner') !== false) && 
-						(template.uploadFields.get('selectedFile') !== false)){
-				template.find('[id="submitUpload"]').disabled = false;
-			}else{
-				template.find('[id="submitUpload"]').disabled = true;
-			}
-    }
+    'change .uploadForm, textinput .uploadForm, keyup .uploadForm': function(event, template){
+    	var uploadInprogress = template.uploadInprogress.get();
+    	if (!uploadInprogress){
+	    	if (	template.find('[name="title"]').value !== '' &&
+	    				template.find('[name="subject"]').value !== '' &&
+	    				template.find('[name="grade"]').value !== '' &&
+	    				template.find('[name="tags"]').value !== '' &&
+	    				template.find('[name="selectedFile"]').value !== ''	)
+	    	{
+	    		template.find('[id="submitUpload"]').disabled = false;
+	    	} else {
+	    		template.find('[id="submitUpload"]').disabled = true;
+	    	}
+	    }
+    },
 });

@@ -81,13 +81,13 @@
 	</div>
 
 	<!-- Modal -->
-	<div id="uploadModal" class="modal fade" role="dialog" tabindex="-1" aria-labelledby="uploadModalLabel" aria-hidden="true">
+	<div id="uploadModal" class="modal fade" role="dialog" tabindex="-1" aria-labelledby="uploadModalLabel" aria-hidden="true" data-backdrop="static" data-keyboard="false">
 	  <div class="modal-dialog" role="document">
 
 	    <!-- Modal content-->
 	    <div class="modal-content">
 	      <div class="modal-header">
-	        <button type="button" class="close" data-dismiss="modal">&times;</button>
+	        <button id="closeUploadModal" type="button" class="close" data-dismiss="modal">&times;</button>
 	        <h4 class="modal-title" id="uploadModalLabel">Upload your lesson plan.</h4>
 	      </div>
 	      <div class="modal-body">
@@ -132,8 +132,8 @@
 					      <span id="progress">{{progress}}%</span>
 					    {{/with}}
 					  {{else}}
-					    <input class="uploadForm" id="fileInput" type="file"  accept=".pdf" name="selectedFile" required="">
-					    <input type='button' class='btn btn-primary' value='Upload' id='submitUpload' data-dismiss="modal" disabled="disabled">
+					    <input class="uploadForm" id="fileInput" type="file"  accept=".pdf" name="selectedFile" required>
+					    <input type='button' class='btn btn-primary' value='Upload' id='submitUpload' disabled="disabled">
 					  {{/if}}
 
 	          
