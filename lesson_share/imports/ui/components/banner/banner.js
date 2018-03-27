@@ -1,12 +1,14 @@
 import {Template} from 'meteor/templating';
 import {Meteor} from 'meteor/meteor';
 import {ReactiveVar} from 'meteor/reactive-var';
+import {ReactiveDict} from 'meteor/reactive-dict';
 
 import './banner.html';
 
 import {Docs} from '../../../api/docs/docs.js';
 
-Meteor.subscribe('files.docs.all');
+// Meteor.subscribe('files.docs.all');
+Meteor.subscribe('docs');
 
 var form = document.querySelector('form')
 var inputs = document.querySelectorAll('input')
@@ -41,13 +43,37 @@ Template.login.events({
 });
 
 Template.dashboard.onCreated(function () {
+	var userId = function(){
+  	if (Meteor.userId()){
+  		return Meteor.userId();
+  	}else{
+  		return false;
+  	}
+  };
+  var userName = function(){
+  	if (Meteor.user().profile.name){
+  		return Meteor.user().profile.name;
+  	}else{
+  		return false;
+  	}
+  };
   this.currentFile = new ReactiveVar(false);
+  this.uploadFields = new ReactiveDict({
+  	'title': false,
+    'subject': false,
+    'grade': false,
+    'tags': false,
+    'owner': userId(),
+    'author': userName(),
+    'selectedFile': false
+  });
 });
 
 Template.dashboard.helpers({
   currentFile: function () {
     Template.instance().currentFile.get();
   }
+
 });
 
 
@@ -68,10 +94,10 @@ Template.dashboard.events({
           var tagsVar = template.find('[name="tags"]').value;
           var ownerVar = Meteor.userId();
           var authorVar = Meteor.user().profile.name;
-          var file = template.find('[name="selectedFile"]').files[0];
+          var fileVar = template.find('[name="selectedFile"]').files[0];
           
           Docs.insert({
-            file: file,
+            file: fileVar,
             meta: {
             	title: titleVar,
             	subject: subjectVar,
@@ -96,30 +122,23 @@ Template.dashboard.events({
           });
         }
     },
-    'change': function(event, template){
-    	fields = {
-	    	'titleVar': template.find('[name="title"]').value,
-	      'subjectVar': template.find('[name="subject"]').value,
-	      'gradeVar': template.find('[name="grade"]').value,
-	      'tagsVar': template.find('[name="tags"]').value,
-	      'ownerVar': Meteor.userId(),
-	      'authorVar': Meteor.user().profile.name,
-	      'file': template.find('[name="selectedFile"]').files[0]
-	    };
-	    console.log(fields)
-	    var submitEnabled = false;
-	    for (var key in fields){////// can be hacked by selected file at the start and leaving other fields blank...
-	    	console.log(fields[key])
-	    	submitEnabled = fields[key]
-	    };
-	    if (submitEnabled){
+    'change .uploadForm, blur .uploadForm': function(event, template){
+    	if (event.target.value != ''){
+    		template.uploadFields.set(event.target.name, true);
+    	}else{
+    		template.uploadFields.set(event.target.name, false);
+    	}
 
-	    	console.log("success!")
-	    } else {
-	    	console.log("unsuccess...")
-	    }
-
-
-
+			if (	(template.uploadFields.get('title') !== false) && 
+						(template.uploadFields.get('subject') !== false) && 
+						(template.uploadFields.get('grade') !== false) && 
+						(template.uploadFields.get('tags') !== false) && 
+						(template.uploadFields.get('author') !== false) && 
+						(template.uploadFields.get('owner') !== false) && 
+						(template.uploadFields.get('selectedFile') !== false)){
+				template.find('[id="submitUpload"]').disabled = false;
+			}else{
+				template.find('[id="submitUpload"]').disabled = true;
+			}
     }
 });
