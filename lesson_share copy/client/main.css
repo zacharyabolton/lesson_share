@@ -1,0 +1,78 @@
+/* CSS declarations go here */
+*{
+	color: #666666;
+	font-size: 16px;
+	/*background-color: #ebe9eb;*/
+}
+
+*:focus{
+  outline: none;
+}
+
+#master{
+	
+}
+
+#sub_master{
+	/*background-color: #ebe9eb;*/
+	/*height: 100vh;*/
+
+}
+
+.dropdown-menu{
+	min-width: 30rem;
+	padding: 2rem;
+}
+
+.dropdown-menu form, .dropdown-menu form .form-check, .dropdown-menu form .form-check *{
+	background-color: white;
+}
+
+.upload span, .logout span, #loginMenu span{
+	color: inherit;
+}
+
+
+
+.content{
+	max-width: 500px;
+  margin: auto;
+  text-align: center;
+  
+  /*padding-bottom: 1rem;*/
+}
+
+.modal-content .modal-body form label{
+	padding-top: 1rem;
+}
+
+#fileInput{
+	padding-bottom: 2rem;
+}
+
+h1.content{
+	padding-top: 10rem;
+	padding-bottom: 2rem;
+}
+
+input[name=search]{
+	max-width: 100%;
+	min-width: 100%;
+	background-color: white;
+	padding: 1rem;
+	border-radius: 1rem;
+	border: 1px solid #cccccc;
+}
+
+textarea:focus, input:focus{
+  outline: none;
+}
+
+.logo{
+	user-drag: none; 
+	user-select: none;
+	-moz-user-select: none;
+	-webkit-user-drag: none;
+	-webkit-user-select: none;
+	-ms-user-select: none;
+}
