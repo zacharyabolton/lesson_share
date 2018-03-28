@@ -13,24 +13,19 @@ Template.results.onCreated( () => {
   let template = Template.instance();
 
   template.searchQuery = new ReactiveVar();
-  template.searching   = new ReactiveVar( false );
+  // template.searching   = new ReactiveVar( false );
 
   template.searchQuery.set( '' );
 
   template.autorun( () => {
-    template.subscribe( 'docs', FlowRouter.getParam('params'), () => {
-    	console.log(FlowRouter.getParam('params'))
-      setTimeout( () => {
-        template.searching.set( false );
-      }, 300 );
-    });
+    template.subscribe( 'docs', FlowRouter.getParam('params'));
   });
 });
 
 Template.results.helpers({
-  searching() {
-    return Template.instance().searching.get();
-  },
+  // searching() {
+  //   return Template.instance().searching.get();
+  // },
   query() {
   	// console.log(Template.instance().searchQuery.get())
     return Template.instance().searchQuery.get();
@@ -54,8 +49,6 @@ Template.results.events({
     template.searchQuery.set( value );
 
     // if ( value !== '' && event.keyCode === 13 ) {
-
-    //   template.searchQuery.set( value );
     //   template.searching.set( true );
     // }
 

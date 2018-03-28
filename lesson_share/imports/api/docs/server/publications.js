@@ -11,7 +11,7 @@ import { Match } from 'meteor/check';
 
 
 Meteor.publish( 'docs', function( search ) {
-
+  Meteor._sleepForMs(2000);
 	check( search, Match.OneOf( String, null, undefined ) );
 
 	// console.log('inside publication');
