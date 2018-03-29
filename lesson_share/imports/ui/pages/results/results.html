@@ -5,16 +5,22 @@
 	  
 	  
 	  	{{#if Template.subscriptionsReady}}
-		  	<ul class="list-group">
+		  	<ul id="resultsBody" class="list-group">
 		  		<div id="resultsSearch">
 					  <form class="resultsContent" action="{{query}}" method="post"> <!-- maybe method='post' is unecessary or even detrimental -->
 					 		<input type="text" name="search" placeholder="Search Keywords...">
 					 	</form>
 					</div>
 		  		{{#each docs}}
-		        <li class="list-group-item clearfix">
-		          <span class="pull-left">{{meta.title}} by <strong>{{meta.author}}</strong></span>
-		          <span class="pull-right">{{meta.subject}}</span>
+		        <li class="resultsItem list-group-item clearfix">
+		          <p class="resultsItemContent titleP"><a href="#"><strong class="titleStrong">{{meta.title}}</strong> by {{meta.author}}</a></p>
+		          <p class="resultsItemContent"><strong class="subGradeP subjectStrong">Subject: {{meta.subject}}</strong> <strong class="subGradeP">Grade: {{meta.grade}}</strong></p>
+		          <p class="resultsItemContent tagsP">Tagged: {{meta.tags}}</p>
+		          <p class="resultsItemContent nameP">{{name}}</p>
+		          <a href="{{link}}?download=true" download="{{name}}" target="_parent">
+						    download
+						  </a>&nbsp;
+						  <a href="#">view</a>
 		        </li>
 		      {{else}}
 		        <p class="alert alert-warning">Nothing matching <b>{{params}}</b>.</p>

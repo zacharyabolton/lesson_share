@@ -6,7 +6,13 @@
   },
   "dependencies": {
     "@babel/runtime": "^7.0.0-beta.36",
+    "ajv": "^6.4.0",
     "bcrypt": "^1.0.3",
-    "meteor-node-stubs": "^0.3.2"
+    "fs": "0.0.1-security",
+    "meteor-node-stubs": "^0.3.2",
+    "node-ensure": "0.0.0",
+    "pdfjs-dist": "^2.0.466",
+    "webpack": "^2.7.0",
+    "worker-loader": "^1.1.1"
   }
 }

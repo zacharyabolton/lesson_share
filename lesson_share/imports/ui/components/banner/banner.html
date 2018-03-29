@@ -4,13 +4,14 @@
 		  <a class="navbar-brand" href="/">
 		    <img src="LS_Shadow.svg" width="30" height="30" alt="LS">
 		  </a>
-		  
-      {{#if currentUser}}
-	        {{> dashboard}}
-	    {{else}}
-	        {{> register}}
-	        {{> login}}
-	    {{/if}}
+			<div id="bannerButtons">
+	      {{#if currentUser}}
+		        {{> dashboard}}
+		    {{else}}
+		        {{> register}}
+		        {{> login}}
+		    {{/if}}
+			</div>
 	  </div>
 	</nav>
 </template>

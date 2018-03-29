@@ -39,6 +39,10 @@ Template.results.helpers({
   params() {
   	return FlowRouter.getParam('params')
   },
+  fullDoc(docs){
+    console.log(docs);
+    return "fullDoc Helper returned this."
+  }
 });
 
 Template.results.events({
