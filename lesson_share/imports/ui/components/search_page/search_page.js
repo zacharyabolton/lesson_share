@@ -14,6 +14,7 @@ Template.search_page.onCreated( () => {
 Template.search_page.onRendered( () => {
   let template = Template.instance();
   template.find('[name="search"]').value = '';
+  template.find('[name="search"]').autofocus = true;
 })
 
 Template.search_page.helpers({

@@ -3,7 +3,6 @@ import { Meteor } from 'meteor/meteor';
 import { ReactiveVar } from 'meteor/reactive-var';
 import { ReactiveDict } from 'meteor/reactive-dict';
 
-
 import './banner.html';
 
 import { Docs } from '../../../api/docs/docs.js';
@@ -86,7 +85,6 @@ Template.dashboard.events({
         // We upload only one file, in case
         // there was multiple files selected
         var fileVar = template.find('[name="selectedFile"]').files[0];
-
 
         uploadModalHandler(event, template, false);
         template.uploadInprogress.set(true);

@@ -31,8 +31,8 @@
 
 .homeContent{
 	max-width: 500px;
-  margin: auto;
-  text-align: center;
+  	margin: auto;
+  	text-align: center;
   
   /*padding-bottom: 1rem;*/
 }
@@ -55,6 +55,8 @@ input[name=search]{
 	min-width: 100%;
 	background-color: white;
 	padding: 1rem;
+	font-size: 2rem;
+	font-weight: bolder;
 	/*border-radius: 1rem;*/
 	/*border: 1px solid #cccccc;*/
 	/*box-shadow: 0rem 0rem 1.2rem 0.8rem rgba(200,200,200,0.8);*/
@@ -159,4 +161,22 @@ textarea:focus, input:focus{
 
 .nameP{
 	color: #E75480;
+}
+
+#pdfcanvas{
+	/*border: 1px solid grey;*/
+	min-width: 100%;
+	box-shadow: 0px 0px 1rem 0.5rem #888888;
+}
+
+.SubjectGrade{
+	text-align: left;
+}
+
+.viewContent{
+	max-width: 75%;
+  	margin: auto;
+  	text-align: center;
+  
+  /*padding-bottom: 1rem;*/
 }
