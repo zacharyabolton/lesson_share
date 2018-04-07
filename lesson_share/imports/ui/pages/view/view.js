@@ -18,7 +18,7 @@ Template.view.onCreated( () => {
 
 Template.view.helpers({
   pdfFile() {
-    let pdfFile = Docs.find();
+    let pdfFile = Docs.findOne();
     if ( pdfFile ) {
       return pdfFile;
     }

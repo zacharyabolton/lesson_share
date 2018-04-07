@@ -1,0 +1,7 @@
+{
+  "galaxy.meteor.com": {
+     "env": {
+       "MONGO_URL": "mongodb://zacbolton:K8d-e7d-K9d_dd3@aws-us-east-1-portal.9.dblayer.com:28069/Docs?ssl=true"
+     }
+   }
+}

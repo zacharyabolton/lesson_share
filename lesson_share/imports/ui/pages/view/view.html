@@ -6,13 +6,13 @@
 
 		<div class="viewContent">
 		{{#if Template.subscriptionsReady}}
-			{{#each pdfFile}}
+			{{#with pdfFile.with}}
 				<h1>{{meta.title}}</h1>
 				<h3>By {{meta.author}}</h3>
 				
 				<h6>File Name: {{name}} 
 					<span>
-						<a href="{{link}}?download=true" download="{{name}}" target="_parent">
+						<a href="{{link}}?download=true" download="{{name}}" target="_parent" type="{{type}}">
 			    			download
 			  			</a>
 			  		</span>
@@ -23,10 +23,10 @@
 				
 				<!-- <embed src="{{link}}" alt="{{name}}" width="800px" height="2100px" /> -->
 				<canvas id="pdfcanvas" class="viewContent">{{PDFrenderer}}</canvas>
-				<p>This is where the PDF text should be rendered</p>
+				<!-- <p>This is where the PDF text should be rendered</p> -->
 			{{else}}
 				<h2>nothing matching</h2>
-			{{/each}}
+			{{/with}}
 		{{else}}
 	      {{> loadingDoc}}
 	    {{/if}}
